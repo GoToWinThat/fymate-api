@@ -30,7 +30,7 @@ namespace Infrastructure.Identity
         public async Task<bool> AuthorizeAsync(string userName, string policyName)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == userName);
-            
+
 
             var principal = await _userClaimsPrincipalFactory.CreateAsync(user);
 
@@ -85,14 +85,17 @@ namespace Infrastructure.Identity
         public async Task<Result> LoginUserAsync(string email, string password)
         {
             SignInResult result = new SignInResult();
-            if(_signInManager!=null)
+            if (_signInManager != null)
             {
-                result = await _signInManager.PasswordSignInAsync("Artur",password,true,false);
-              var user = _userManager.Users.SingleOrDefault(u => u.Email == email);
+                var user = _userManager.Users.SingleOrDefault(u => u.Email == email);
+                if (user == null)
+                    return Result.Failure(new string[] { "Email not found" });
+
+                result = await _signInManager.PasswordSignInAsync(user, password, true, false);
                 await AuthorizeAsync(user.UserName, "CanPurge");
             }
 
-            if(result.Succeeded==true)
+            if (result.Succeeded == true)
             {
                 return Result.Success();
             }
@@ -112,7 +115,7 @@ namespace Infrastructure.Identity
             throw new NotImplementedException();
         }
 
-        public async Task<Result> ChangePasswordAsync(string userName,string email,string oldPassword,string newPassword)
+        public async Task<Result> ChangePasswordAsync(string userName, string email, string oldPassword, string newPassword)
         {
             var user = new ApplicationUser
             {
@@ -131,7 +134,7 @@ namespace Infrastructure.Identity
                 Email = email,
             };
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var result = await _userManager.ResetPasswordAsync(user,token,newPassword);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
             return result.ToApplicationResult();
         }
 
@@ -143,7 +146,7 @@ namespace Infrastructure.Identity
                 Email = email,
             };
             var token = await _userManager.GenerateChangeEmailTokenAsync(user, newEmail);
-            var result = await _userManager.ChangeEmailAsync(user,newEmail,token);
+            var result = await _userManager.ChangeEmailAsync(user, newEmail, token);
             return result.ToApplicationResult();
         }
     }

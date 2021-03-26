@@ -1,4 +1,5 @@
-﻿using Core.UseCases.Identity.Commands;
+﻿using Core.Base.Models;
+using Core.UseCases.Identity.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,37 +12,49 @@ namespace Web.FymateApi.Controllers
     [Route("api/[controller]")]
     public class AuthController : ApiControllerBase
     {
-        [Route("RegisterUser")]
+        [HttpPost("RegisterUser")]
         public async Task<ActionResult<bool>> RegisterUser(RegisterUserCommand command)
         {
             return await Mediator.Send(command);
         }
-        [Route("LoginUser")]
+
+        /// <summary>
+        /// Logins users, and returns JWT token on successfull auth
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>
+        /// 200, JWT token - if successful
+        /// 401 - if email, password pair not found
+        /// </returns>
+        [HttpPost("LoginUser")]
         public async Task<ActionResult<bool>> LoginUser(LoginUserCommand command)
         {
-            return await Mediator.Send(command);
+            bool success = await Mediator.Send(command);
+            if (success)
+                return new OkResult();
+            return new UnauthorizedResult();
         }
-        [Route("LogoutUser")]
+        [HttpPost("LogoutUser")]
         public async Task<ActionResult<bool>> LogoutUser(LogoutUserCommand command)
         {
             return await Mediator.Send(command);
         }
-        [Route("ConfirmEmail")]
+        [HttpPost("ConfirmEmail")]
         public async Task<ActionResult<bool>> ConfirmEmail(ConfirmEmailCommand command)
         {
             return await Mediator.Send(command);
         }
-        [Route("ChangeEmail")]
+        [HttpPost("ChangeEmail")]
         public async Task<ActionResult<bool>> ChangeEmail(ChangeEmailCommand command)
         {
             return await Mediator.Send(command);
         }
-        [Route("ChangePassword")]
+        [HttpPatch("ChangePassword")]
         public async Task<ActionResult<bool>> ChangePassword(ChangePasswordCommand command)
         {
             return await Mediator.Send(command);
         }
-        [Route("ResetPassword")]
+        [HttpPatch("ResetPassword")]
         public async Task<ActionResult<bool>> ResetPassword(ResetPasswordCommand command)
         {
             return await Mediator.Send(command);

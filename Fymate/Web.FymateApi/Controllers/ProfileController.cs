@@ -10,8 +10,7 @@ namespace Web.FymateApi.Controllers
     [Authorize]
     public class ProfileController : ApiControllerBase
     {
-        [HttpGet]
-        [Route("Profiles")]
+        [HttpGet("Profiles")]
         public async Task<ActionResult<ProfilesVm>> GetProfiles()
         {
             return await Mediator.Send(new GetProfilesQuery());

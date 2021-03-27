@@ -107,12 +107,10 @@ namespace Infrastructure.Identity
 
                 if (result.Succeeded == true)
                 {
-
+                    //TODO: take key from keystore
                     var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keykeykeykeykeykeykeykey"));
                     var expiration = 60; //[s]
                     return JWTAuthorizationResult.Success(new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
-                        issuer: "localhost", //TODO: take value from config
-                        audience: "audience",
                         claims: GetClaimTokens(user.Id),
                         notBefore: DateTime.Now,
                         expires: DateTime.Now.Add(TimeSpan.FromSeconds(expiration)),

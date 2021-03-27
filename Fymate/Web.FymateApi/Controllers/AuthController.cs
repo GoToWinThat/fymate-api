@@ -1,5 +1,6 @@
 ﻿using Core.Base.Models;
-using Core.UseCases.Identity.Commands;
+using Core.Concrete.Identity.Commands;
+using Core.Concrete.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,11 +28,11 @@ namespace Web.FymateApi.Controllers
         /// 401 - if email, password pair not found
         /// </returns>
         [HttpPost("LoginUser")]
-        public async Task<ActionResult<bool>> LoginUser(LoginUserCommand command)
+        public async Task<ActionResult<JWTAuthorizationResult>> LoginUser(LoginUserCommand command)
         {
-            bool success = await Mediator.Send(command);
-            if (success)
-                return new OkResult();
+            var result = await Mediator.Send(command);
+            if (result.Succeeded)
+                return new OkObjectResult(result.Token);
             return new UnauthorizedResult();
         }
         [HttpPost("LogoutUser")]

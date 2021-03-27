@@ -1,4 +1,4 @@
-﻿using Core.UseCases.Profiles.Queries;
+﻿using Core.Concrete.Profiles.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

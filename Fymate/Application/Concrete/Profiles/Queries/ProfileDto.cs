@@ -1,7 +1,7 @@
 ﻿using Core.Base.Mappings;
 using Domain.Entities;
 
-namespace Core.UseCases.Profiles.Queries
+namespace Core.Concrete.Profiles.Queries
 {
     public class ProfileDto : IMapFrom<Profile>
     {

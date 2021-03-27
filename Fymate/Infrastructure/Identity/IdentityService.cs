@@ -1,10 +1,16 @@
 ﻿using Core.Base.Interfaces;
 using Core.Base.Models;
+using Core.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Identity
@@ -30,12 +36,8 @@ namespace Infrastructure.Identity
         public async Task<bool> AuthorizeAsync(string userName, string policyName)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == userName);
-
-
             var principal = await _userClaimsPrincipalFactory.CreateAsync(user);
-
             var result = await _authorizationService.AuthorizeAsync(principal, policyName);
-
             return result.Succeeded;
         }
 
@@ -67,9 +69,10 @@ namespace Infrastructure.Identity
         public async Task<bool> IsInRoleAsync(string userName, string role)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == userName);
-
             return await _userManager.IsInRoleAsync(user, role);
         }
+
+
         public async Task<(Result Result, string UserId)> RegisterUserAsync(string email, string userName, string password)
         {
             var user = new ApplicationUser
@@ -82,28 +85,60 @@ namespace Infrastructure.Identity
 
             return (result.ToApplicationResult(), user.Id);
         }
-        public async Task<Result> LoginUserAsync(string email, string password)
+
+        /// <summary>
+        /// Checks user credentials agains Identity DB, and constructs JWT token if successful
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public async Task<JWTAuthorizationResult> LoginUserAsync(string email, string password)
         {
             SignInResult result = new SignInResult();
             if (_signInManager != null)
             {
                 var user = _userManager.Users.SingleOrDefault(u => u.Email == email);
                 if (user == null)
-                    return Result.Failure(new string[] { "Email not found" });
+                    return JWTAuthorizationResult.Failure(new string[] { "Email not found" });
 
                 result = await _signInManager.PasswordSignInAsync(user, password, true, false);
                 await AuthorizeAsync(user.UserName, "CanPurge");
+
+
+                if (result.Succeeded == true)
+                {
+
+                    var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keykeykeykeykeykeykeykey"));
+                    var expiration = 60; //[s]
+                    return JWTAuthorizationResult.Success(new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
+                        issuer: "localhost", //TODO: take value from config
+                        audience: "audience",
+                        claims: GetClaimTokens(user.Id),
+                        notBefore: DateTime.Now,
+                        expires: DateTime.Now.Add(TimeSpan.FromSeconds(expiration)),
+                        signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
+                    )));
+                }
+                else
+                {
+                    return JWTAuthorizationResult.Failure(new string[] { "Wrong password" });
+                }
             }
 
-            if (result.Succeeded == true)
-            {
-                return Result.Success();
-            }
-            else
-            {
-                return Result.Failure(new string[] { "Wrong password" });
-            }
+            throw new Exception("signInManager cannot be null");
         }
+
+        private IEnumerable<Claim> GetClaimTokens(string userID)
+        {
+            //For info about JWT claims
+            //go to: https://auth0.com/docs/tokens/json-web-tokens/json-web-token-claims
+            return new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userID), //Subject
+                new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()), //Issued at
+            };
+        }
+
 
         public async Task LogoutUserAsync(string userName)
         {

@@ -1,31 +1,27 @@
 ﻿using Core.Base.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.UseCases.Identity.Commands
+namespace Core.Concrete.Identity.Commands
 {
-    public class LoginUserCommand : IRequest<bool>
+    public class ConfirmEmailCommand : IRequest<bool>
     {
         public string Email { get; set; }
 
         public string Password { get; set; }
     }
 
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, bool>
+    public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, bool>
     {
         private readonly IIdentityService _identityService;
 
-        public LoginUserCommandHandler(IIdentityService identityService)
+        public ConfirmEmailCommandHandler(IIdentityService identityService)
         {
             _identityService = identityService;
         }
 
-        public async Task<bool> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
         {
             var result = await _identityService.LoginUserAsync(request.Email, request.Password);
             return result.Succeeded;

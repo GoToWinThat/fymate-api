@@ -3,7 +3,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.UseCases.Identity.Commands
+namespace Core.Concrete.Identity.Commands
 {
     public class ResetPasswordCommand : IRequest<bool>
     {

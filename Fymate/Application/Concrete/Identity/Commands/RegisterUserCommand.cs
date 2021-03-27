@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.UseCases.Identity.Commands
+namespace Core.Concrete.Identity.Commands
 {
     public class RegisterUserCommand : IRequest<bool>
     {

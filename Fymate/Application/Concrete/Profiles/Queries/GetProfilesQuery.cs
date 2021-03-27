@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.UseCases.Profiles.Queries
+namespace Core.Concrete.Profiles.Queries
 {
     public class GetProfilesQuery : IRequest<ProfilesVm> { }
     public class GetProfilesQueryHandler : IRequestHandler<GetProfilesQuery, ProfilesVm>

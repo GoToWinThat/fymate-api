@@ -34,6 +34,12 @@ namespace Web.FymateApi
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+
+            var settingsSection = Configuration.GetSection("AppSettings");
+            var settings = settingsSection.Get<AppSettings>();
+
+            services.Configure<AppSettings>(settingsSection);
+
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 
@@ -45,6 +51,7 @@ namespace Web.FymateApi
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
 
 
 
@@ -65,7 +72,7 @@ namespace Web.FymateApi
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keykeykeykeykeykeykeykey")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.AuthKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
@@ -81,7 +88,6 @@ namespace Web.FymateApi
                         .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
-
                     });
             });
         }

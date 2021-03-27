@@ -4,6 +4,7 @@ using Core.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -21,17 +22,20 @@ namespace Infrastructure.Identity
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
         private readonly IAuthorizationService _authorizationService;
+        private readonly AppSettings _settings;
 
         public IdentityService(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IOptions<AppSettings> settings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
+            _settings = settings.Value;
         }
         public async Task<bool> AuthorizeAsync(string userName, string policyName)
         {
@@ -102,14 +106,14 @@ namespace Infrastructure.Identity
                     return JWTAuthorizationResult.Failure(new string[] { "Email not found" });
 
                 result = await _signInManager.PasswordSignInAsync(user, password, true, false);
-                await AuthorizeAsync(user.UserName, "CanPurge");
+                await AuthorizeAsync(user.UserName, "CanPurge"); //?? is it needed?
 
 
                 if (result.Succeeded == true)
                 {
                     //TODO: take key from keystore
-                    var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keykeykeykeykeykeykeykey"));
-                    var expiration = 60; //[s]
+                    var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.AuthKey));
+                    var expiration = _settings.Expire; //[s]
                     return JWTAuthorizationResult.Success(new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
                         claims: GetClaimTokens(user.Id),
                         notBefore: DateTime.Now,

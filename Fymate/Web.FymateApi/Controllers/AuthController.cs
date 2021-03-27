@@ -1,6 +1,7 @@
 ﻿using Core.Base.Models;
 using Core.Concrete.Identity.Commands;
 using Core.Concrete.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,27 +36,37 @@ namespace Web.FymateApi.Controllers
                 return new OkObjectResult(result.Token);
             return new UnauthorizedResult();
         }
+
         [HttpPost("LogoutUser")]
+        [Authorize]
         public async Task<ActionResult<bool>> LogoutUser(LogoutUserCommand command)
         {
             return await Mediator.Send(command);
         }
+
         [HttpPost("ConfirmEmail")]
+        [Authorize]
         public async Task<ActionResult<bool>> ConfirmEmail(ConfirmEmailCommand command)
         {
             return await Mediator.Send(command);
         }
+
         [HttpPost("ChangeEmail")]
+        [Authorize]
         public async Task<ActionResult<bool>> ChangeEmail(ChangeEmailCommand command)
         {
             return await Mediator.Send(command);
         }
+
         [HttpPatch("ChangePassword")]
+        [Authorize]
         public async Task<ActionResult<bool>> ChangePassword(ChangePasswordCommand command)
         {
             return await Mediator.Send(command);
         }
+
         [HttpPatch("ResetPassword")]
+        [Authorize]
         public async Task<ActionResult<bool>> ResetPassword(ResetPasswordCommand command)
         {
             return await Mediator.Send(command);

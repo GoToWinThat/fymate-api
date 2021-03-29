@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,16 @@ namespace Web.FymateApi.Controllers
     [Route("api/[controller]")]
     public class AuthController : ApiControllerBase
     {
+
+        private readonly IAuthorizationService _authService;
+
+        public AuthController(IAuthorizationService authService)
+        {
+            _authService = authService;
+        }
+
         [HttpPost("RegisterUser")]
+        [AllowAnonymous]
         public async Task<ActionResult<bool>> RegisterUser(RegisterUserCommand command)
         {
             return await Mediator.Send(command);
@@ -29,6 +39,7 @@ namespace Web.FymateApi.Controllers
         /// 401 - if email, password pair not found
         /// </returns>
         [HttpPost("LoginUser")]
+        [AllowAnonymous]
         public async Task<ActionResult<JWTAuthorizationResult>> LoginUser(LoginUserCommand command)
         {
             var result = await Mediator.Send(command);

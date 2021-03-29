@@ -1,4 +1,4 @@
-﻿using Core.Base.Interfaces;
+using Core.Base.Interfaces;
 using Infrastructure.Identity;
 using Infrastructure.Persistance.DatabaseContext;
 using Infrastructure.Services;
@@ -38,15 +38,6 @@ namespace Infrastructure
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddTransient<IIdentityService, IdentityService>();
-
-            services.AddAuthentication()
-               .AddIdentityServerJwt();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
-            });
             return services;
         }
     }

@@ -23,19 +23,22 @@ namespace Infrastructure.Identity
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
         private readonly IAuthorizationService _authorizationService;
         private readonly AppSettings _settings;
+        private readonly IProfileService _profileService;
 
         public IdentityService(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
             IAuthorizationService authorizationService,
-            IOptions<AppSettings> settings)
+            IOptions<AppSettings> settings,
+            IProfileService profileService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
             _settings = settings.Value;
+            _profileService = profileService;
         }
         public async Task<bool> AuthorizeAsync(string userName, string policyName)
         {
@@ -48,7 +51,7 @@ namespace Infrastructure.Identity
         public async Task<Result> DeleteUserAsync(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
-
+            
             if (user != null)
             {
                 return await DeleteUserAsync(user);
@@ -87,6 +90,10 @@ namespace Infrastructure.Identity
 
             var result = await _userManager.CreateAsync(user, password);
 
+            //Create profile for user account
+            //TODO: inline this, provide db via service, not profile service 
+            await _profileService.CreateProfileAsync(user.Id);
+
             return (result.ToApplicationResult(), user.Id);
         }
 
@@ -106,12 +113,11 @@ namespace Infrastructure.Identity
                     return JWTAuthorizationResult.Failure(new string[] { "Email not found" });
 
                 result = await _signInManager.PasswordSignInAsync(user, password, true, false);
-                await AuthorizeAsync(user.UserName, "CanPurge"); //?? is it needed?
+                await AuthorizeAsync(user.UserName, "IsAdmin"); //Is this needed??
 
 
                 if (result.Succeeded == true)
                 {
-                    //TODO: take key from keystore
                     var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.AuthKey));
                     var expiration = _settings.Expire; //[s]
                     return JWTAuthorizationResult.Success(new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(

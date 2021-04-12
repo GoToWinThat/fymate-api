@@ -51,7 +51,7 @@ namespace Infrastructure.Identity
         public async Task<Result> DeleteUserAsync(string userId)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
-            
+
             if (user != null)
             {
                 return await DeleteUserAsync(user);
@@ -62,14 +62,12 @@ namespace Infrastructure.Identity
         public async Task<Result> DeleteUserAsync(ApplicationUser user)
         {
             var result = await _userManager.DeleteAsync(user);
-
             return result.ToApplicationResult();
         }
 
         public async Task<string> GetUserNameAsync(string userId)
         {
             var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
-
             return user.UserName;
         }
 
@@ -78,7 +76,6 @@ namespace Infrastructure.Identity
             var user = _userManager.Users.SingleOrDefault(u => u.UserName == userName);
             return await _userManager.IsInRoleAsync(user, role);
         }
-
 
         public async Task<(Result Result, string UserId)> RegisterUserAsync(string email, string userName, string password)
         {
@@ -111,10 +108,7 @@ namespace Infrastructure.Identity
                 var user = _userManager.Users.SingleOrDefault(u => u.Email == email);
                 if (user == null)
                     return JWTAuthorizationResult.Failure(new string[] { "Email not found" });
-
                 result = await _signInManager.PasswordSignInAsync(user, password, true, false);
-                await AuthorizeAsync(user.UserName, "IsAdmin"); //Is this needed??
-
 
                 if (result.Succeeded == true)
                 {

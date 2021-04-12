@@ -9,7 +9,7 @@ namespace Core.Concrete.Models
     {
         internal JWTAuthorizationResult(bool succeeded, IEnumerable<string> errors) : base(succeeded, errors)
         { }
-        
+
         public string Token { get; set; }
 
         new public static JWTAuthorizationResult Success(string token)

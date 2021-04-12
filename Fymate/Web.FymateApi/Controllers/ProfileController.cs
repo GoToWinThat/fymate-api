@@ -5,11 +5,11 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Web.FymateApi.Services;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 namespace Web.FymateApi.Controllers
 {
@@ -39,7 +39,6 @@ namespace Web.FymateApi.Controllers
         [HttpPost("{profileID}")]
         public async Task<ActionResult> PostProfile(int profileID, ModifyProfileCommandPayload command)
         {
-
             //Now this is bad because we do the same fetch in our Service
             //But we need to do this here, because our services
             //dont have a full request information like Controllers do
@@ -51,7 +50,6 @@ namespace Web.FymateApi.Controllers
             var authResult = await _authorizationService.AuthorizeAsync(User, profile, new IsOwnerAuthorizationRequirement());
             if (authResult.Succeeded == false)
                 return new UnauthorizedResult();
-
 
 
             command.id = profileID;

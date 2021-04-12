@@ -21,11 +21,9 @@ namespace Web.FymateApi
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-
                     if (context.Database.IsSqlServer())
                     {
                         context.Database.Migrate();

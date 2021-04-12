@@ -1,18 +1,25 @@
 ﻿using Core.Base.Interfaces;
 using Domain.Entities;
+using IdentityServer4.EntityFramework.Options;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.DatabaseContext
 {
-    public class ApplicationDbContext: DbContext, IApplicationDbContext
+    public class ApplicationDbContext: ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
         private readonly IDomainEventService _domainEventService;
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Advert> Adverts { get; set; }
-        public ApplicationDbContext(DbContextOptions options, IDomainEventService domainEventService) : base(options)
+        public ApplicationDbContext(
+            DbContextOptions options,
+            IOptions<OperationalStoreOptions> operationalStoreOptions,
+            IDomainEventService domainEventService) : base(options, operationalStoreOptions)
         {
             _domainEventService = domainEventService;
         }

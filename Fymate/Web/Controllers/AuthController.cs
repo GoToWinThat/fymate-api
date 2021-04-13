@@ -1,6 +1,7 @@
 ﻿using Fymate.Core.Base.Models;
 using Fymate.Core.Concrete.Identity.Commands;
 using Fymate.Core.Concrete.Models;
+using Fymate.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace Fymate.Web.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class AuthController : ApiControllerBase
     {
 
@@ -49,37 +51,42 @@ namespace Fymate.Web.Controllers
         }
 
         [HttpPost("LogoutUser")]
-        [Authorize]
         public async Task<ActionResult<bool>> LogoutUser(LogoutUserCommand command)
         {
+            //TODO: unneeded in JWT, logout is handled on client side
             return await Mediator.Send(command);
         }
 
         [HttpPost("ConfirmEmail")]
-        [Authorize]
         public async Task<ActionResult<bool>> ConfirmEmail(ConfirmEmailCommand command)
         {
             return await Mediator.Send(command);
         }
 
-        [HttpPost("ChangeEmail")]
-        [Authorize]
+        [HttpPatch("ChangeEmail")]
         public async Task<ActionResult<bool>> ChangeEmail(ChangeEmailCommand command)
         {
+            var authResult = await _authService.AuthorizeAsync(User, command.UserName, new IsExistingProfileRequirement());
+            if (authResult.Succeeded == false)
+                return new UnauthorizedResult();
             return await Mediator.Send(command);
         }
 
         [HttpPatch("ChangePassword")]
-        [Authorize]
         public async Task<ActionResult<bool>> ChangePassword(ChangePasswordCommand command)
         {
+            var authResult = await _authService.AuthorizeAsync(User, command.UserName, new IsExistingProfileRequirement());
+            if (authResult.Succeeded == false)
+                return new UnauthorizedResult();
             return await Mediator.Send(command);
         }
 
         [HttpPatch("ResetPassword")]
-        [Authorize]
         public async Task<ActionResult<bool>> ResetPassword(ResetPasswordCommand command)
         {
+            var authResult = await _authService.AuthorizeAsync(User, command.UserName, new IsExistingProfileRequirement());
+            if (authResult.Succeeded == false)
+                return new UnauthorizedResult();
             return await Mediator.Send(command);
         }
     }

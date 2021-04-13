@@ -97,7 +97,8 @@ namespace Fymate.Web
             });
 
 
-            services.AddSingleton<IAuthorizationHandler, IsOwnerAuthorizationHandler>();
+            services.AddTransient<IAuthorizationHandler, IsOwnerAuthorizationHandler>();
+            services.AddTransient<IAuthorizationHandler, IsExistingProfileAuthorizationHandler>();
 
             services.AddAuthorization(options =>
             {
@@ -108,6 +109,9 @@ namespace Fymate.Web
 
                 options.AddPolicy("IsOwnerPolicy", policy =>
                     policy.Requirements.Add(new IsOwnerAuthorizationRequirement()));
+
+                options.AddPolicy("IsExistingProfilePolicy", policy =>
+               policy.Requirements.Add(new IsExistingProfileRequirement()));
 
                 options.AddPolicy("IsAdmin", policy =>
                     policy.RequireRole("Admin"));

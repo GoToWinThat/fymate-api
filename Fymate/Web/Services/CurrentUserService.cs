@@ -15,6 +15,7 @@ namespace Fymate.Web.Services
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
+            Console.WriteLine(UserId);
         }
 
         public string UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);

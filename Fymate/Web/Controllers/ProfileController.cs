@@ -21,6 +21,7 @@ namespace Fymate.Web.Controllers
 
         private readonly IAuthorizationService _authorizationService;
         private readonly IApplicationDbContext _db;
+        private readonly ICurrentUserService _cus;
 
 
         public ProfileController(IAuthorizationService authorizationService, IApplicationDbContext db)
@@ -39,18 +40,12 @@ namespace Fymate.Web.Controllers
         [HttpPost("{profileID}")]
         public async Task<ActionResult> PostProfile(int profileID, ModifyProfileCommandPayload command)
         {
-            //Now this is bad because we do the same fetch in our Service
-            //But we need to do this here, because our services
-            //dont have a full request information like Controllers do
-            //[Authorize] cannot determine a "resource" to do operations on
-            //so IAuthorizationService neede to be injected. I welcome better proposals 
-            //This prime candidate for refactor.
+            //TODO: somehow reuse this? we make same call in profile service 
             Profile profile = _db.Profiles.First(x => x.Id == profileID);
             //Authorize
             var authResult = await _authorizationService.AuthorizeAsync(User, profile, new IsOwnerAuthorizationRequirement());
             if (authResult.Succeeded == false)
                 return new UnauthorizedResult();
-
 
             command.id = profileID;
             if (await Mediator.Send(command))

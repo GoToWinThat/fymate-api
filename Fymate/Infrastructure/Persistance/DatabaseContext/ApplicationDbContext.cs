@@ -1,7 +1,7 @@
-﻿using Core.Base.Interfaces;
-using Domain.Entities;
+﻿using Fymate.Core.Base.Interfaces;
+using Fymate.Domain.Entities;
 using IdentityServer4.EntityFramework.Options;
-using Infrastructure.Identity;
+using Fymate.Infrastructure.Identity;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,9 +9,9 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistance.DatabaseContext
+namespace Fymate.Infrastructure.Persistance.DatabaseContext
 {
-    public class ApplicationDbContext: ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
         private readonly IDomainEventService _domainEventService;
         public DbSet<Profile> Profiles { get; set; }

@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{61A6D862-8542-4FA6-8451-D5AD3BD5FA1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.FymateApi", "Web.FymateApi\Web.FymateApi.csproj", "{E1C969DA-940C-426B-A4CA-3710EB8F0FCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{E1C969DA-940C-426B-A4CA-3710EB8F0FCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB506D93-FDFC-4AD9-ACD5-183151A09A72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration", "Tests\Integration\Integration.csproj", "{0159E5B8-4C0B-4DBB-8E83-98B47F850A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +37,18 @@ Global
 		{E1C969DA-940C-426B-A4CA-3710EB8F0FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1C969DA-940C-426B-A4CA-3710EB8F0FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1C969DA-940C-426B-A4CA-3710EB8F0FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0159E5B8-4C0B-4DBB-8E83-98B47F850A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0159E5B8-4C0B-4DBB-8E83-98B47F850A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0159E5B8-4C0B-4DBB-8E83-98B47F850A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0159E5B8-4C0B-4DBB-8E83-98B47F850A83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E74B9D34-FEDF-4ED9-BBD2-E1D7D0A9334B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0159E5B8-4C0B-4DBB-8E83-98B47F850A83} = {FB506D93-FDFC-4AD9-ACD5-183151A09A72}
 	EndGlobalSection
 EndGlobal

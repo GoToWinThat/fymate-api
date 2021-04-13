@@ -1,6 +1,6 @@
-﻿using Core.Base.Interfaces;
-using Core.Base.Models;
-using Core.Concrete.Models;
+﻿using Fymate.Core.Base.Interfaces;
+using Fymate.Core.Base.Models;
+using Fymate.Core.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Identity
+namespace Fymate.Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {

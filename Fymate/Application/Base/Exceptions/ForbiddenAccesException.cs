@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Base.Exceptions
+namespace Fymate.Core.Base.Exceptions
 {
     public class ForbiddenAccessException : Exception
     {

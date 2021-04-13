@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Base.Exceptions
+namespace Fymate.Core.Base.Exceptions
 {
     public class ValidationException : Exception
     {

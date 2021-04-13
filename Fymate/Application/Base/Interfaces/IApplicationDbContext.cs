@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
+﻿using Fymate.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Base.Interfaces
+namespace Fymate.Core.Base.Interfaces
 {
     public interface IApplicationDbContext
     {

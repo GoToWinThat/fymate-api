@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Base.Models
+namespace Fymate.Core.Base.Models
 {
     public class Result
     {

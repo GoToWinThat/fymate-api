@@ -1,10 +1,10 @@
-﻿using Core.Base.Behaviours;
+﻿using Fymate.Core.Base.Behaviours;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Core
+namespace Fymate.Core
 {
     public static class DependencyInjection
     {

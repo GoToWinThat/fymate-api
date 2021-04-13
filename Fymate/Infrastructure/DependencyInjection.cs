@@ -1,14 +1,14 @@
-using Core.Base.Interfaces;
-using Infrastructure.Identity;
-using Infrastructure.Persistance.DatabaseContext;
-using Infrastructure.Services;
+using Fymate.Core.Base.Interfaces;
+using Fymate.Infrastructure.Identity;
+using Fymate.Infrastructure.Persistance.DatabaseContext;
+using Fymate.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure
+namespace Fymate.Infrastructure
 {
     public static class DependencyInjection
     {

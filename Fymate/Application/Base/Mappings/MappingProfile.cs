@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Base.Mappings
+namespace Fymate.Core.Base.Mappings
 {
     public class MappingProfile : Profile
     {

@@ -1,12 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Core;
-using Core.Base.Interfaces;
+using Fymate.Core;
+using Fymate.Core.Base.Interfaces;
 using FluentValidation.AspNetCore;
-using Infrastructure;
-using Infrastructure.Identity;
-using Infrastructure.Persistance.DatabaseContext;
-using Infrastructure.Services;
+using Fymate.Infrastructure;
+using Fymate.Infrastructure.Identity;
+using Fymate.Infrastructure.Persistance.DatabaseContext;
+using Fymate.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -19,10 +19,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Web.FymateApi.Filters;
-using Web.FymateApi.Services;
+using Fymate.Web.Filters;
+using Fymate.Web.Services;
 
-namespace Web.FymateApi
+namespace Fymate.Web
 {
     public class Startup
     {

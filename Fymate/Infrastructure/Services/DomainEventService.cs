@@ -1,12 +1,12 @@
-﻿using Core.Base.Interfaces;
-using Core.Base.Models;
-using Domain.Common;
+﻿using Fymate.Core.Base.Interfaces;
+using Fymate.Core.Base.Models;
+using Fymate.Domain.Common;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Services
+namespace Fymate.Infrastructure.Services
 {
     public class DomainEventService : IDomainEventService
     {

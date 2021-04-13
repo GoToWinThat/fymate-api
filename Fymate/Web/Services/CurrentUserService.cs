@@ -1,4 +1,4 @@
-﻿using Core.Base.Interfaces;
+﻿using Fymate.Core.Base.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Web.FymateApi.Services
+namespace Fymate.Web.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

@@ -1,4 +1,4 @@
-namespace Domain.Base.Models
+namespace Fymate.Domain.Base.Models
 {
     public interface IHasOwner
     {

@@ -1,5 +1,5 @@
-﻿using Core.Base.Interfaces;
-using Core.Base.Models;
+﻿using Fymate.Core.Base.Interfaces;
+using Fymate.Core.Base.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Concrete.Identity.Commands
+namespace Fymate.Core.Concrete.Identity.Commands
 {
     public class LogoutUserCommand : IRequest<bool>
     {

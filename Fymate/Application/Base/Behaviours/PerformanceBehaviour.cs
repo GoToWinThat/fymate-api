@@ -1,11 +1,11 @@
-﻿using Core.Base.Interfaces;
+﻿using Fymate.Core.Base.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Base.Behaviours
+namespace Fymate.Core.Base.Behaviours
 {
     public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

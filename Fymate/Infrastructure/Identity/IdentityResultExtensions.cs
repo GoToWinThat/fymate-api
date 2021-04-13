@@ -1,4 +1,4 @@
-﻿using Core.Base.Models;
+﻿using Fymate.Core.Base.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Identity
+namespace Fymate.Infrastructure.Identity
 {
     public static class IdentityResultExtensions
     {

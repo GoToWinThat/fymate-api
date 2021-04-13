@@ -1,7 +1,7 @@
-﻿using Core.Base.Mappings;
-using Domain.Entities;
+﻿using Fymate.Core.Base.Mappings;
+using Fymate.Domain.Entities;
 
-namespace Core.Concrete.Profiles.Queries
+namespace Fymate.Core.Concrete.Profiles.Queries
 {
     public class ProfileDto : IMapFrom<Profile>
     {

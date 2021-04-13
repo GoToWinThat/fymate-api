@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using Core.Base.Models;
+using Fymate.Core.Base.Models;
 
-namespace Core.Concrete.Models
+namespace Fymate.Core.Concrete.Models
 {
     public class JWTAuthorizationResult : Result
     {

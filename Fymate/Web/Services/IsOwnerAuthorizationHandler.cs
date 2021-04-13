@@ -1,12 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Domain.Base.Models;
+using Fymate.Domain.Base.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Web.FymateApi.Services
+namespace Fymate.Web.Services
 {
     public class IsOwnerAuthorizationHandler : AuthorizationHandler<IsOwnerAuthorizationRequirement, IHasOwner>
     {

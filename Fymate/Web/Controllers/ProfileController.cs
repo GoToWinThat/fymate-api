@@ -1,17 +1,17 @@
-﻿using Core.Base.Interfaces;
-using Core.Concrete.Profiles.Commands;
-using Core.Concrete.Profiles.Queries;
-using Domain.Entities;
+﻿using Fymate.Core.Base.Interfaces;
+using Fymate.Core.Concrete.Profiles.Commands;
+using Fymate.Core.Concrete.Profiles.Queries;
+using Fymate.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Web.FymateApi.Services;
+using Fymate.Web.Services;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
 
-namespace Web.FymateApi.Controllers
+namespace Fymate.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

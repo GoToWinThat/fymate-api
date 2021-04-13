@@ -1,4 +1,4 @@
-namespace Infrastructure.Identity
+namespace Fymate.Infrastructure.Identity
 {
     public class AppSettings
     {

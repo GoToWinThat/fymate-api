@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Domain.Base.Models;
+using Fymate.Domain.Base.Models;
 
-namespace Domain.Entities
+namespace Fymate.Domain.Entities
 {
     public class Advert : IHasOwner
     {

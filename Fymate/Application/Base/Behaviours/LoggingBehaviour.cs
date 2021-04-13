@@ -1,10 +1,10 @@
-﻿using Core.Base.Interfaces;
+﻿using Fymate.Core.Base.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Base.Behaviours
+namespace Fymate.Core.Base.Behaviours
 {
     public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
     {

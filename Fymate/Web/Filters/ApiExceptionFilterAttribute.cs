@@ -1,4 +1,4 @@
-﻿using Core.Base.Exceptions;
+﻿using Fymate.Core.Base.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.FymateApi.Filters
+namespace Fymate.Web.Filters
 {
     public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     {

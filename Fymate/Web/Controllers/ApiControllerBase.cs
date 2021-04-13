@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Web.FymateApi.Controllers
+namespace Fymate.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

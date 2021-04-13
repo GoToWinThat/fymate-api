@@ -1,7 +1,7 @@
-﻿using Domain.Entities;
+﻿using Fymate.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistance.DatabaseContext
+namespace Fymate.Infrastructure.Persistance.DatabaseContext
 {
     public static class ModelBuilderExtension
     {

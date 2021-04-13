@@ -1,4 +1,4 @@
-using Infrastructure.Persistance.DatabaseContext;
+using Fymate.Infrastructure.Persistance.DatabaseContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.FymateApi
+namespace Fymate.Web
 {
     public class Program
     {

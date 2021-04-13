@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Base.Mappings
+namespace Fymate.Core.Base.Mappings
 {
     public interface IMapFrom<T>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Concrete.Profiles.Queries
+namespace Fymate.Core.Concrete.Profiles.Queries
 {
     public class ProfilesVm
     {

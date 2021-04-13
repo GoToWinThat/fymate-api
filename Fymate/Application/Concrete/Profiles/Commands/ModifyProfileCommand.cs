@@ -1,9 +1,9 @@
-using Core.Base.Interfaces;
+using Fymate.Core.Base.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Concrete.Profiles.Commands
+namespace Fymate.Core.Concrete.Profiles.Commands
 {
     public class ModifyProfileCommandPayload : IRequest<bool>
     {

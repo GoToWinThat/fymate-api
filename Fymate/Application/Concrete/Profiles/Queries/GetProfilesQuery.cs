@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Base.Interfaces;
+using Fymate.Core.Base.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Concrete.Profiles.Queries
+namespace Fymate.Core.Concrete.Profiles.Queries
 {
     public class GetProfilesQuery : IRequest<ProfilesVm> { }
     public class GetProfilesQueryHandler : IRequestHandler<GetProfilesQuery, ProfilesVm>

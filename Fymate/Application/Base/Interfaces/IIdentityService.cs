@@ -1,8 +1,8 @@
-﻿using Core.Base.Models;
-using Core.Concrete.Models;
+﻿using Fymate.Core.Base.Models;
+using Fymate.Core.Concrete.Models;
 using System.Threading.Tasks;
 
-namespace Core.Base.Interfaces
+namespace Fymate.Core.Base.Interfaces
 {
     public interface IIdentityService
     {

@@ -1,4 +1,4 @@
-﻿namespace Core.Base.Behaviours
+﻿namespace Fymate.Core.Base.Behaviours
 {
     class AuthorizationBehaviour
     {

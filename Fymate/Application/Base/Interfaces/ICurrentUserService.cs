@@ -1,4 +1,4 @@
-﻿namespace Core.Base.Interfaces
+﻿namespace Fymate.Core.Base.Interfaces
 {
     public interface ICurrentUserService
     {

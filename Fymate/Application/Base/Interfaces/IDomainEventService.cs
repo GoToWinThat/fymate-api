@@ -1,7 +1,7 @@
-﻿using Domain.Common;
+﻿using Fymate.Domain.Common;
 using System.Threading.Tasks;
 
-namespace Core.Base.Interfaces
+namespace Fymate.Core.Base.Interfaces
 {
     public interface IDomainEventService
     {

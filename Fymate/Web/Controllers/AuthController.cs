@@ -1,6 +1,6 @@
-﻿using Core.Base.Models;
-using Core.Concrete.Identity.Commands;
-using Core.Concrete.Models;
+﻿using Fymate.Core.Base.Models;
+using Fymate.Core.Concrete.Identity.Commands;
+using Fymate.Core.Concrete.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.FymateApi.Controllers
+namespace Fymate.Web.Controllers
 {
     [Route("api/[controller]")]
     public class AuthController : ApiControllerBase
